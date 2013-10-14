@@ -4,6 +4,8 @@ import urllib
 import urllib2
 import simplejson
 import os
+from lb import parser as local_bitcoins_parser
+from zipzap import parser as zipzap_parser
 
 icon_mapping = {
 'aeroway:aerodrome': 'transport_airport',
@@ -153,6 +155,8 @@ icon_mapping = {
 'tourism:viewpoint': 'tourist_view_point',
 'tourism:zoo': 'tourist_zoo',
 'traffic_calming:yes': 'transport_speedbump',
+'local_bitcoins:local_bitcoins': 'local_bitcoins',
+'zipzap:zipzap': 'zipzap'
 }
 
 def determine_icon(tags):
@@ -161,13 +165,70 @@ def determine_icon(tags):
     k,v = kv.split(':')
     t = tags.get(k)
     if not t:
-        continue
+      continue
     t = t.split(';')[0]
     if t == v:
       icon = icon_mapping[kv]
       break
   icon = icon.replace('-', '_')
   return icon
+
+
+def write_elements(f, e):
+  lat = e.get('lat', None)
+  lon = e.get('lon', None)
+  typ = e['type']
+  tags = e.get('tags', {})
+  for k in tags.keys():
+      if tags[k]:
+        tags[k] = cgi.escape(tags[k]).replace('"', '\\"')
+  ide = e['id']
+
+  if typ == 'node':
+    nodes[ide] = (lat, lon)
+    if tags.get('payment:bitcoin') != 'yes': # nodes that are part of way (i.e. not accepting bitcoin)
+      return None
+
+  if typ == 'way':
+    lat, lon = nodes[e['nodes'][0]] # extract coordinate of first node
+
+  if not lat or not lon:
+    return None
+
+  if 'name' in tags:
+    name = tags['name']
+  else:
+    name = '%s %s' % (typ, ide)
+
+  icon = determine_icon(tags)
+  popup = '<b>%s</b> <a href=\\"http://openstreetmap.org/browse/%s/%s\\" target=\\"_blank\\">*</a><hr/>' % (name, typ, ide)
+  if 'addr:street' in tags:
+    popup += '%s %s<br/>' % (tags.get('addr:street', ''), tags.get('addr:housenumber', ''))
+  if 'addr:city' in tags:
+    popup += '%s %s<br/>' % (tags.get('addr:postcode', ''), tags.get('addr:city', ''))
+  if 'addr:country' in tags:
+    popup += '%s<br/>' % (tags.get('addr:country', ''))
+  popup += '<hr/>'
+  if 'contact:website' in tags:
+    w = tags['contact:website']
+    if not w.startswith('http'):
+      w = 'http://' + w
+    popup += 'website: <a href=\\"%s\\" target=\\"_blank\\">%s</a><br/>' % (w, w)
+  elif 'website' in tags:
+    w = tags['website']
+    if not w.startswith('http'):
+      w = 'http://' + w
+    popup += 'website: <a href=\\"%s\\" target=\\"_blank\\">%s</a><br/>' % (w, w)
+  if 'contact:email' in tags:
+    popup += 'email: <a href=\\"mailto:%s\\" target=\\"_blank\\">%s</a><br/>' % (tags['contact:email'], tags['contact:email'])
+  elif 'email' in tags:
+    popup += 'email: <a href=\\"mailto:%s\\" target=\\"_blank\\">%s</a><br/>' % (tags['email'], tags['email'])
+  if 'contact:phone' in tags:
+    popup += 'phone: %s<br/>' % (tags['contact:phone'])
+  elif 'phone' in tags:
+    popup += 'phone: %s<br/>' % (tags['phone'])
+  f.write('  L.marker([%s, %s], {"title": "%s", icon: icon_%s}).bindPopup("%s").addTo(markers);\n' % (lat, lon, name.encode('utf-8'), icon, popup.encode('utf-8')))
+
 
 scriptdir = os.path.dirname(os.path.abspath(__file__))
 
@@ -180,60 +241,16 @@ cnt = 0
 
 with open(scriptdir + '/coinmap-data.js', 'w') as f:
   f.write('function coinmap_populate(markers) {\n')
-  for e in json['elements']:
-    lat = e.get('lat', None)
-    lon = e.get('lon', None)
-    typ = e['type']
-    tags = e.get('tags', {})
-    for k in tags.keys():
-        tags[k] = cgi.escape(tags[k]).replace('"', '\\"')
-    ide = e['id']
+  data_sources = [
+      json['elements'],
+      local_bitcoins_parser.get_lb_points(),
+      zipzap_parser.get_zipzap_points()
+  ]
+  for source in data_sources:
+    for d in source:
+      place = write_elements(f, d)
+      if place:
+        cnt += 1
 
-    if typ == 'node':
-      nodes[ide] = (lat,lon)
-      if tags.get('payment:bitcoin') != 'yes': # nodes that are part of way (i.e. not accepting bitcoin)
-        continue
-
-    if typ == 'way':
-      lat, lon = nodes[e['nodes'][0]] # extract coordinate of first node
-
-    if not lat or not lon:
-      continue
-
-    cnt += 1
-
-    if 'name' in tags:
-      name = tags['name']
-    else:
-      name = '%s %s' % (typ, ide)
-
-    icon = determine_icon(tags)
-    popup = '<b>%s</b> <a href=\\"http://openstreetmap.org/browse/%s/%s\\" target=\\"_blank\\">*</a><hr/>' % (name, typ, ide)
-    if 'addr:street' in tags:
-      popup += '%s %s<br/>' % (tags.get('addr:street', ''), tags.get('addr:housenumber', ''))
-    if 'addr:city' in tags:
-      popup += '%s %s<br/>' % (tags.get('addr:postcode', ''), tags.get('addr:city', ''))
-    if 'addr:country' in tags:
-      popup += '%s<br/>' % (tags.get('addr:country', ''))
-    popup += '<hr/>'
-    if 'contact:website' in tags:
-      w = tags['contact:website']
-      if not w.startswith('http'):
-        w = 'http://' + w
-      popup += 'website: <a href=\\"%s\\" target=\\"_blank\\">%s</a><br/>' % (w, w)
-    elif 'website' in tags:
-      w = tags['website']
-      if not w.startswith('http'):
-        w = 'http://' + w
-      popup += 'website: <a href=\\"%s\\" target=\\"_blank\\">%s</a><br/>' % (w, w)
-    if 'contact:email' in tags:
-      popup += 'email: <a href=\\"mailto:%s\\" target=\\"_blank\\">%s</a><br/>' % (tags['contact:email'], tags['contact:email'])
-    elif 'email' in tags:
-      popup += 'email: <a href=\\"mailto:%s\\" target=\\"_blank\\">%s</a><br/>' % (tags['email'], tags['email'])
-    if 'contact:phone' in tags:
-      popup += 'phone: %s<br/>' % (tags['contact:phone'])
-    elif 'phone' in tags:
-      popup += 'phone: %s<br/>' % (tags['phone'])
-    f.write('  L.marker([%s, %s], {"title": "%s", icon: icon_%s}).bindPopup("%s").addTo(markers);\n' % (lat, lon, name.encode('utf-8'), icon, popup.encode('utf-8')))
   f.write('  document.getElementById("count").innerHTML = "<b>%d</b>";\n' % cnt);
   f.write('}\n')
