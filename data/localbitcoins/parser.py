@@ -37,8 +37,9 @@ def write_elements(f, e):
     else:
         name = '?'
     icon = 'localbitcoins'
-    popup = '<b>%s</b> <a href=\\"https://localbitcoins.com/ad/%s\\" target=\\"_blank\\">*</a><hr/>' % (name, ide)
+    popup = '<b>%s</b><hr/>' % name
     popup += 'address: %s' % e.get('location_string', '')
+    popup += 'website: <a href=\\"https://localbitcoins.com/ad/%s\\" target=\\"_blank\\">https://localbitcoins.com/ad/%s</a>' % (ide, ide)
     f.write('  L.marker([%s, %s], {"title": "%s", icon: icon_%s}).bindPopup("%s").addTo(markers);\n' % (lat, lon, name.encode('utf-8'), icon, popup.encode('utf-8')))
 
 def write_markers(f):
