@@ -1,10 +1,7 @@
-import urllib
-import urllib2
-import simplejson
+import requests
 
 usa_cities = 'zipzap/usa_cities.csv'
 merchantid = 946
-
 
 def get_usa_cities():
     cities = []
@@ -13,15 +10,10 @@ def get_usa_cities():
             cities.append(line.strip())
     return cities
 
-
 def call_zipzap(location):
-    location_encode = urllib.urlencode({'searchAddress': location, 'MerchantID': merchantid})
-    url = 'https://www.cashpayment.com/API/PaymentCenter?%s' % location_encode
-    f = urllib2.urlopen(url)
-    json = simplejson.load(f)
-    f.close()
+    json = requests.get('https://www.cashpayment.com/API/PaymentCenter',
+                        params = {'searchAddress': location, 'MerchantID': merchantid}).json()
     return json
-
 
 def convert_to_coinmap(data):
     j = {
@@ -40,8 +32,7 @@ def convert_to_coinmap(data):
     }
     return j
 
-
-def get_zipzap_points():
+def get_points():
     cities = get_usa_cities()
     result = {}
     for c in cities:

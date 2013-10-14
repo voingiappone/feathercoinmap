@@ -1,11 +1,5 @@
-#!/usr/bin/python
 import cgi
-import urllib
-import urllib2
-import simplejson
-import os
-from lb import parser as local_bitcoins_parser
-from zipzap import parser as zipzap_parser
+import requests
 
 icon_mapping = {
 'aeroway:aerodrome': 'transport_airport',
@@ -155,9 +149,9 @@ icon_mapping = {
 'tourism:viewpoint': 'tourist_view_point',
 'tourism:zoo': 'tourist_zoo',
 'traffic_calming:yes': 'transport_speedbump',
-'local_bitcoins:local_bitcoins': 'local_bitcoins',
-'zipzap:zipzap': 'zipzap'
 }
+
+nodes = {}
 
 def determine_icon(tags):
   icon = 'bitcoin'
@@ -172,7 +166,6 @@ def determine_icon(tags):
       break
   icon = icon.replace('-', '_')
   return icon
-
 
 def write_elements(f, e):
   lat = e.get('lat', None)
@@ -229,28 +222,12 @@ def write_elements(f, e):
     popup += 'phone: %s<br/>' % (tags['phone'])
   f.write('  L.marker([%s, %s], {"title": "%s", icon: icon_%s}).bindPopup("%s").addTo(markers);\n' % (lat, lon, name.encode('utf-8'), icon, popup.encode('utf-8')))
 
+  return True
 
-scriptdir = os.path.dirname(os.path.abspath(__file__))
+def get_points():
+  json = requests.get('http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:bitcoin"=yes];way["payment:bitcoin"=yes];>;);out;').json()
+  return json['elements']
 
-f = urllib2.urlopen('http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:bitcoin"=yes];way["payment:bitcoin"=yes];>;);out;')
-json = simplejson.load(f)
-f.close()
-
-nodes = {}
-cnt = 0
-
-with open(scriptdir + '/coinmap-data.js', 'w') as f:
-  f.write('function coinmap_populate(markers) {\n')
-  data_sources = [
-      json['elements'],
-      local_bitcoins_parser.get_lb_points(),
-      zipzap_parser.get_zipzap_points()
-  ]
-  for source in data_sources:
-    for d in source:
-      place = write_elements(f, d)
-      if place:
-        cnt += 1
-
-  f.write('  document.getElementById("count").innerHTML = "<b>%d</b>";\n' % cnt);
-  f.write('}\n')
+def write_markers(f):
+  for p in get_points():
+    write_elements(f, p)
