@@ -31,13 +31,17 @@ def write_elements(f, e):
         return
 
     ide = str(e.get('ad_id'))
+    price = e.get('temp_price_usd', None)
     profile = e.get('profile', None)
     if profile:
         name = profile.get('name', '?')
     else:
         name = '?'
+
     icon = 'localbitcoins'
     popup = '<b>%s</b><hr/>' % name
+    if price:
+        popup += 'price: %s USD' % price
     popup += 'address: %s' % e.get('location_string', '')
     popup += 'website: <a href=\\"https://localbitcoins.com/ad/%s\\" target=\\"_blank\\">https://localbitcoins.com/ad/%s</a>' % (ide, ide)
     f.write('  L.marker([%s, %s], {"title": "%s", icon: icon_%s}).bindPopup("%s").addTo(markers);\n' % (lat, lon, name.encode('utf-8'), icon, popup.encode('utf-8')))
