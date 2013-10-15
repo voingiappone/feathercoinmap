@@ -229,5 +229,8 @@ def get_points():
   return json['elements']
 
 def write_markers(f):
+  cnt = 0
   for p in get_points():
-    write_elements(f, p)
+    if write_elements(f, p):
+      cnt += 1
+  f.write('  document.getElementById("count").innerHTML = "<b>%d</b>";\n' % cnt);
