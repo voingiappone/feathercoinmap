@@ -38,3 +38,10 @@ body {
 a {
   color: #0078A8;
 }
+
+/* hides footer in small screen */
+@media (max-width: 780px) { 
+  #footer {
+    display: none;
+  }
+}
