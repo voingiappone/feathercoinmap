@@ -40,7 +40,7 @@ function coinmap() {
   var markers = new L.MarkerClusterGroup({showCoverageOnHover: false, maxClusterRadius: 32});
 
   coinmap_populate_overpass(markers);
-  coinmap_populate_localbitcoins(markers);
+//  coinmap_populate_localbitcoins(markers);
 //  coinmap_populate_zipzap(markers);
 
   map.addLayer(markers);

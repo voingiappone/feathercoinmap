@@ -11,10 +11,12 @@ with open(scriptdir + '/data-overpass.js', 'w') as f:
   overpass_parser.write_markers(f)
   f.write('}\n')
 
+"""
 with open(scriptdir + '/data-localbitcoins.js', 'w') as f:
   f.write('function coinmap_populate_localbitcoins(markers) {\n')
   localbitcoins_parser.write_markers(f)
   f.write('}\n')
+"""
 
 """
 with open(scriptdir + '/data-zipzap.js', 'w') as f:
