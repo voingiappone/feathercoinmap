@@ -220,6 +220,8 @@ def write_elements(f, e):
     popup += 'phone: %s<br/>' % (tags['contact:phone'])
   elif 'phone' in tags:
     popup += 'phone: %s<br/>' % (tags['phone'])
+  if 'description' in tags:
+    popup += 'description: %s<br/>' % (tags['description'])
   f.write('  L.marker([%s, %s], {"title": "%s", icon: icon_%s}).bindPopup("%s").addTo(markers);\n' % (lat, lon, name.encode('utf-8'), icon, popup.encode('utf-8')))
 
   return True
