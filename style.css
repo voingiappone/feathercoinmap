@@ -39,8 +39,13 @@ a {
   color: #0078A8;
 }
 
+img.leaflet-marker-icon {
+  box-shadow: 0px 0px 16px #000000;
+  border-radius: 12px;
+}
+
 /* hides footer in small screen */
-@media (max-width: 780px) { 
+@media (max-width: 780px) {
   #footer {
     display: none;
   }
