@@ -152,6 +152,7 @@ icon_mapping = {
 }
 
 nodes = {}
+ways = {}
 
 def determine_icon(tags):
   icon = 'bitcoin'
@@ -182,8 +183,14 @@ def write_elements(f, e):
     if tags.get('payment:bitcoin') != 'yes': # nodes that are part of way (i.e. not accepting bitcoin)
       return None
 
-  if typ == 'way':
+  elif typ == 'way':
     lat, lon = nodes[e['nodes'][0]] # extract coordinate of first node
+    ways[ide] = (lat, lon)
+    if tags.get('payment:bitcoin') != 'yes': # ways that are part of relation
+      return None
+
+  elif typ == 'relation':
+    lat, lon = ways[e['members'][0]['ref']]
 
   if not lat or not lon:
     return None
@@ -227,7 +234,7 @@ def write_elements(f, e):
   return True
 
 def get_points():
-  json = requests.get('http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:bitcoin"=yes];way["payment:bitcoin"=yes];>;);out;').json()
+  json = requests.get('http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:bitcoin"=yes];>;way["payment:bitcoin"=yes];>;relation["payment:bitcoin"=yes];>;);out;').json()
   return json['elements']
 
 def write_markers(f):
