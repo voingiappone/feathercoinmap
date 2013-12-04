@@ -155,91 +155,85 @@ nodes = {}
 ways = {}
 
 def determine_icon(tags):
-  icon = 'bitcoin'
-  for kv in icon_mapping:
-    k,v = kv.split(':')
-    t = tags.get(k)
-    if not t:
-      continue
-    t = t.split(';')[0]
-    if t == v:
-      icon = icon_mapping[kv]
-      break
-  icon = icon.replace('-', '_')
-  return icon
-
-def write_elements(f, e):
-  lat = e.get('lat', None)
-  lon = e.get('lon', None)
-  typ = e['type']
-  tags = e.get('tags', {})
-  for k in tags.keys():
-      if tags[k]:
-        tags[k] = cgi.escape(tags[k]).replace('"', '\\"')
-  ide = e['id']
-
-  if typ == 'node':
-    nodes[ide] = (lat, lon)
-    if tags.get('payment:bitcoin') != 'yes': # nodes that are part of way (i.e. not accepting bitcoin)
-      return None
-
-  elif typ == 'way':
-    lat, lon = nodes[e['nodes'][0]] # extract coordinate of first node
-    ways[ide] = (lat, lon)
-    if tags.get('payment:bitcoin') != 'yes': # ways that are part of relation
-      return None
-
-  elif typ == 'relation':
-    lat, lon = ways[e['members'][0]['ref']]
-
-  if not lat or not lon:
-    return None
-
-  if 'name' in tags:
-    name = tags['name']
-  else:
-    name = '%s %s' % (typ, ide)
-
-  icon = determine_icon(tags)
-  popup = '<b>%s</b> <a href=\\"http://openstreetmap.org/browse/%s/%s\\" target=\\"_blank\\">*</a><hr/>' % (name, typ, ide)
-  if 'addr:street' in tags:
-    popup += '%s %s<br/>' % (tags.get('addr:street', ''), tags.get('addr:housenumber', ''))
-  if 'addr:city' in tags:
-    popup += '%s %s<br/>' % (tags.get('addr:postcode', ''), tags.get('addr:city', ''))
-  if 'addr:country' in tags:
-    popup += '%s<br/>' % (tags.get('addr:country', ''))
-  popup += '<hr/>'
-  if 'contact:website' in tags:
-    w = tags['contact:website']
-    if not w.startswith('http'):
-      w = 'http://' + w
-    popup += 'website: <a href=\\"%s\\" target=\\"_blank\\">%s</a><br/>' % (w, w)
-  elif 'website' in tags:
-    w = tags['website']
-    if not w.startswith('http'):
-      w = 'http://' + w
-    popup += 'website: <a href=\\"%s\\" target=\\"_blank\\">%s</a><br/>' % (w, w)
-  if 'contact:email' in tags:
-    popup += 'email: <a href=\\"mailto:%s\\" target=\\"_blank\\">%s</a><br/>' % (tags['contact:email'], tags['contact:email'])
-  elif 'email' in tags:
-    popup += 'email: <a href=\\"mailto:%s\\" target=\\"_blank\\">%s</a><br/>' % (tags['email'], tags['email'])
-  if 'contact:phone' in tags:
-    popup += 'phone: %s<br/>' % (tags['contact:phone'])
-  elif 'phone' in tags:
-    popup += 'phone: %s<br/>' % (tags['phone'])
-  if 'description' in tags:
-    popup += 'description: %s<br/>' % (tags['description'])
-  f.write('  L.marker([%s, %s], {"title": "%s", icon: icon_%s}).bindPopup("%s").addTo(markers);\n' % (lat, lon, name.encode('utf-8'), icon, popup.encode('utf-8')))
-
-  return True
+	icon = 'bitcoin'
+	for kv in icon_mapping:
+		k,v = kv.split(':')
+		t = tags.get(k)
+		if not t:
+			continue
+		t = t.split(';')[0]
+		if t == v:
+			icon = icon_mapping[kv]
+			break
+	icon = icon.replace('-', '_')
+	return icon
 
 def get_points():
-  json = requests.get('http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:bitcoin"=yes];>;way["payment:bitcoin"=yes];>;relation["payment:bitcoin"=yes];>;);out;').json()
-  return json['elements']
+	points = []
+	resp = requests.get('http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:bitcoin"=yes];>;way["payment:bitcoin"=yes];>;relation["payment:bitcoin"=yes];>;);out;').json()
+	print len(resp['elements'])
+	for e in resp['elements']:
+		lat = e.get('lat', None)
+		lon = e.get('lon', None)
+		typ = e['type']
+		tags = e.get('tags', {})
+		for k in tags.keys():
+				if tags[k]:
+					tags[k] = cgi.escape(tags[k]).replace('"', '\\"')
+		ide = e['id']
 
-def write_markers(f):
-  cnt = 0
-  for p in get_points():
-    if write_elements(f, p):
-      cnt += 1
-  f.write('  document.getElementById("count").innerHTML = "<b>%d</b>";\n' % cnt);
+		if typ == 'node':
+			nodes[ide] = (lat, lon)
+			if tags.get('payment:bitcoin') != 'yes': # nodes that are part of way (i.e. not accepting bitcoin)
+				continue
+
+		elif typ == 'way':
+			lat, lon = nodes[e['nodes'][0]] # extract coordinate of first node
+			ways[ide] = (lat, lon)
+			if tags.get('payment:bitcoin') != 'yes': # ways that are part of relation
+				continue
+
+		elif typ == 'relation':
+			lat, lon = ways[e['members'][0]['ref']]
+
+		if not lat or not lon:
+			continue
+
+		if 'name' in tags:
+			name = tags['name']
+		else:
+			name = '%s %s' % (typ, ide)
+
+		icon = determine_icon(tags)
+		point = {'lat': lat, 'lon': lon, 'title': name, 'id': ide, 'type': typ, 'icon': icon}
+
+		if 'addr:street' in tags:
+			point['addr'] = '%s %s' % (tags.get('addr:street', ''), tags.get('addr:housenumber', ''))
+		if 'addr:city' in tags:
+			point['city'] = '%s %s' % (tags.get('addr:postcode', ''), tags.get('addr:city', ''))
+		if 'addr:country' in tags:
+			point['country'] = tags.get('addr:country', '')
+		if 'contact:website' in tags:
+			w = tags['contact:website']
+			if not w.startswith('http'):
+				w = 'http://' + w
+			point['web'] = w
+		elif 'website' in tags:
+			w = tags['website']
+			if not w.startswith('http'):
+				w = 'http://' + w
+			point['web'] = w
+		if 'contact:email' in tags:
+			point['email'] = tags['contact:email']
+		elif 'email' in tags:
+			point['email'] = tags['email']
+		if 'contact:phone' in tags:
+			point['phone'] = tags['contact:phone']
+		elif 'phone' in tags:
+			point['phone'] = tags['phone']
+		if 'description' in tags:
+			point['desc'] = tags['description']
+
+		points.append(point)
+
+	return points

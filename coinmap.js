@@ -44,7 +44,7 @@ function coinmap() {
 //  coinmap_populate_zipzap(markers);
 
   map.addLayer(markers);
-  
+
   map.on('moveend', function(e){
     if(map.getZoom() >= 13){
       document.getElementById("osm_edit_link").href = "http://www.openstreetmap.org/edit#map=" + map.getZoom() + "/" + map.getCenter().lat.toFixed(6) + "/" + map.getCenter().lng.toFixed(6);
