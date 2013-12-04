@@ -6,6 +6,11 @@ from zipzap import parser as zipzap_parser
 
 scriptdir = os.path.dirname(os.path.abspath(__file__))
 
+currencies = [
+    'bitcoin',
+    'litecoin'
+]
+
 parsers = {
   'overpass': overpass_parser,
 #  'localbitcoins': localbitcoins_parser,
@@ -13,7 +18,9 @@ parsers = {
 }
 
 for name, parser in parsers.iteritems():
-  with open(scriptdir + '/data-%s.js' % name, 'w') as f:
-    f.write('function coinmap_populate_%s(markers) {\n' % name)
-    parser.write_markers(f)
-    f.write('}\n')
+    for currency in currencies:
+        if currency in parser.supports():
+            with open(scriptdir + '/data-%s.js' % name, 'w') as f:
+                f.write('function coinmap_populate_%s(markers) {\n' % name)
+                parser.write_markers(f, currency)
+                f.write('}\n')
