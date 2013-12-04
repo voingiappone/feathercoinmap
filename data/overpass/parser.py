@@ -238,9 +238,10 @@ def get_points(currency):
   json = requests.get(url).json()
   return json['elements']
 
-def write_markers(f, currency):
-  cnt = 0
+def write_markers(f, currency, cnt):
   for p in get_points(currency):
     if write_elements(f, p, currency):
       cnt += 1
   f.write('  document.getElementById("count").innerHTML = "<b>%d</b>";\n' % cnt);
+
+  return cnt
