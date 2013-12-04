@@ -154,8 +154,8 @@ icon_mapping = {
 nodes = {}
 ways = {}
 
-def determine_icon(tags):
-  icon = 'bitcoin'
+def determine_icon(tags, currency):
+  icon = currency
   for kv in icon_mapping:
     k,v = kv.split(':')
     t = tags.get(k)
@@ -168,7 +168,7 @@ def determine_icon(tags):
   icon = icon.replace('-', '_')
   return icon
 
-def write_elements(f, e):
+def write_elements(f, e, currency):
   lat = e.get('lat', None)
   lon = e.get('lon', None)
   typ = e['type']
@@ -180,13 +180,13 @@ def write_elements(f, e):
 
   if typ == 'node':
     nodes[ide] = (lat, lon)
-    if tags.get('payment:bitcoin') != 'yes': # nodes that are part of way (i.e. not accepting bitcoin)
+    if tags.get('payment:'+ currency) != 'yes': # nodes that are part of way (i.e. not accepting ) currency
       return None
 
   elif typ == 'way':
     lat, lon = nodes[e['nodes'][0]] # extract coordinate of first node
     ways[ide] = (lat, lon)
-    if tags.get('payment:bitcoin') != 'yes': # ways that are part of relation
+    if tags.get('payment:'+ currency) != 'yes': # ways that are part of relation
       return None
 
   elif typ == 'relation':
@@ -233,13 +233,14 @@ def write_elements(f, e):
 
   return True
 
-def get_points():
-  json = requests.get('http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:bitcoin"=yes];>;way["payment:bitcoin"=yes];>;relation["payment:bitcoin"=yes];>;);out;').json()
+def get_points(currency):
+  url = 'http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:'+currency+'"=yes];>;way["payment:'+currency+'"=yes];>;relation["payment:'+currency+'"=yes];>;);out;'
+  json = requests.get(url).json()
   return json['elements']
 
-def write_markers(f):
+def write_markers(f, currency):
   cnt = 0
-  for p in get_points():
-    if write_elements(f, p):
+  for p in get_points(currency):
+    if write_elements(f, p, currency):
       cnt += 1
   f.write('  document.getElementById("count").innerHTML = "<b>%d</b>";\n' % cnt);
