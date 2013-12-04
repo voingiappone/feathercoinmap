@@ -39,7 +39,7 @@ def get_points():
     cities = get_usa_cities()
     result = {}
     for c in cities:
-        for currency,i in merchantIDs:
+        for currency,i in merchantIDs.iteritems():
             data = call_zipzap(c, i)
             for point in data:
                 zipzap_loc = convert_to_coinmap(point, currency)
