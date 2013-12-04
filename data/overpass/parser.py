@@ -180,13 +180,13 @@ def write_elements(f, e, currency):
 
   if typ == 'node':
     nodes[ide] = (lat, lon)
-    if tags.get('payment:'+ currency) != 'yes': # nodes that are part of way (i.e. not accepting ) currency
+    if tags.get('payment:' + currency) != 'yes': # nodes that are part of way (i.e. not accepting ) currency
       return None
 
   elif typ == 'way':
     lat, lon = nodes[e['nodes'][0]] # extract coordinate of first node
     ways[ide] = (lat, lon)
-    if tags.get('payment:'+ currency) != 'yes': # ways that are part of relation
+    if tags.get('payment:' + currency) != 'yes': # ways that are part of relation
       return None
 
   elif typ == 'relation':
