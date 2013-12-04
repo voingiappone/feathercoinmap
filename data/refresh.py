@@ -23,5 +23,5 @@ for name, parser in parsers.iteritems():
         if currency in parser.supports():
             with open(scriptdir + '/data-%s.js' % name, 'w') as f:
                 f.write('function coinmap_populate_%s(markers) {\n' % name)
-                parser.write_markers(f, currency, cnt)
+                cnt = parser.write_markers(f, currency, cnt)
                 f.write('}\n')
