@@ -17,10 +17,11 @@ parsers = {
 #  'zipzap': zipzap_parser,
 }
 
+cnt = 0
 for name, parser in parsers.iteritems():
     for currency in currencies:
         if currency in parser.supports():
             with open(scriptdir + '/data-%s.js' % name, 'w') as f:
                 f.write('function coinmap_populate_%s(markers) {\n' % name)
-                parser.write_markers(f, currency)
+                parser.write_markers(f, currency, cnt)
                 f.write('}\n')
