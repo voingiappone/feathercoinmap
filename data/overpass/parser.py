@@ -245,3 +245,6 @@ def write_markers(f, currency, cnt):
   f.write('  document.getElementById("count").innerHTML = "<b>%d</b>";\n' % cnt);
 
   return cnt
+
+def supports():
+  return ['bitcoin', 'litecoin']
