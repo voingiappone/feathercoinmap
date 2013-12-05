@@ -154,8 +154,8 @@ icon_mapping = {
 nodes = {}
 ways = {}
 
-def determine_icon(tags):
-	icon = 'bitcoin'
+def determine_icon(tags, coin = 'bitcoin'):
+	icon = coin
 	for kv in icon_mapping:
 		k,v = kv.split(':')
 		t = tags.get(k)
@@ -168,9 +168,9 @@ def determine_icon(tags):
 	icon = icon.replace('-', '_')
 	return icon
 
-def get_points():
+def get_points(coin = 'bitcoin'):
 	points = []
-	resp = requests.get('http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:bitcoin"=yes];>;way["payment:bitcoin"=yes];>;relation["payment:bitcoin"=yes];>;);out;').json()
+	resp = requests.get('http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:%s"=yes];>;way["payment:%s"=yes];>;relation["payment:%s"=yes];>;);out;' % (coin, coin, coin)).json()
 	print len(resp['elements'])
 	for e in resp['elements']:
 		lat = e.get('lat', None)
@@ -184,13 +184,13 @@ def get_points():
 
 		if typ == 'node':
 			nodes[ide] = (lat, lon)
-			if tags.get('payment:bitcoin') != 'yes': # nodes that are part of way (i.e. not accepting bitcoin)
+			if tags.get('payment:%s' % coin) != 'yes': # nodes that are part of way (i.e. not accepting coins)
 				continue
 
 		elif typ == 'way':
 			lat, lon = nodes[e['nodes'][0]] # extract coordinate of first node
 			ways[ide] = (lat, lon)
-			if tags.get('payment:bitcoin') != 'yes': # ways that are part of relation
+			if tags.get('payment:%s' % coin) != 'yes': # ways that are part of relation
 				continue
 
 		elif typ == 'relation':
@@ -204,7 +204,7 @@ def get_points():
 		else:
 			name = '%s %s' % (typ, ide)
 
-		icon = determine_icon(tags)
+		icon = determine_icon(tags, coin)
 		point = {'lat': lat, 'lon': lon, 'title': name, 'id': ide, 'type': typ, 'icon': icon}
 
 		if 'addr:street' in tags:
