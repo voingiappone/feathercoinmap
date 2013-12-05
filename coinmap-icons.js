@@ -1,5 +1,6 @@
 var specials = [
 'bitcoin',
+'litecoin',
 'localbitcoins',
 'zipzap'
 ];
