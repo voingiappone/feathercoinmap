@@ -27,15 +27,13 @@ function coinmap() {
     maxZoom: 18
   });
 
-  var map = L.map('map', { center: [0, 0], zoom: 3, layers: [tileOSM], worldCopyJump: true });
-
-  var layers = L.control.layers({
-    "OpenStreetMap": tileOSM,
-    "MapQuestOpen": tileMapQuest,
-    "MapQuestOpenAerial": tileMapQuestAerial,
-    "Toner": tileToner,
-    "Watercolor": tileWatercolor,
-  }).addTo(map);
+  var map = L.map('map',
+    {
+      center: [0, 0],
+      zoom: 3,
+      layers: [tileOSM],
+      worldCopyJump: true
+    });
 
   var c_clusters = {};
   var currencies = get_currencies();
@@ -45,12 +43,20 @@ function coinmap() {
 
 
   coinmap_populate_overpass(c_clusters);
-//  coinmap_populate_localbitcoins(markers);
-//  coinmap_populate_zipzap(markers);
 
-  for (var i = c_clusters.length - 1; i >= 0; i--) {
-    map.addLayer(c_clusters[i]);
-  }
+  var layers = L.control.layers({
+    "OpenStreetMap": tileOSM,
+    "MapQuestOpen": tileMapQuest,
+    "MapQuestOpenAerial": tileMapQuestAerial,
+    "Toner": tileToner,
+    "Watercolor": tileWatercolor,
+  },c_clusters, {
+    collapsed: false
+  }).addTo(map);
+
+
+  //coinmap_populate_localbitcoins(markers);
+  //coinmap_populate_zipzap(markers);
 
   map.on('moveend', function(e){
     if(map.getZoom() >= 13){
@@ -63,5 +69,5 @@ function coinmap() {
 
   map.locate({setView: true, maxZoom: 12});
 
-  map.addControl(new L.Control.Permalink({text: 'Permalink', layers: layers, position: "none", useLocation: true}));
+  // map.addControl(new L.Control.Permalink({text: 'Permalink', layers: layers, position: "none", useLocation: true}));
 }
