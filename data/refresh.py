@@ -19,12 +19,13 @@ parsers = {
 
 cnt = 0
 for name, parser in parsers.iteritems():
-    for currency in currencies:
-        if currency in parser.supports():
-            with open(scriptdir + '/data-%s.js' % name, 'w') as f:
-                f.write('function coinmap_populate_%s(cluster) {\n' % name)
+    with open(scriptdir + '/data-%s.js' % name, 'w') as f:
+        f.write('function coinmap_populate_%s(cluster) {\n' % name)
+        for currency in currencies:
+            if currency in parser.supports():
                 cnt = parser.write_markers(f, currency, cnt)
-                f.write('}\n')
+
+        f.write('}\n')
 
 # Update data/currencies
 with open(scriptdir + '/currencies.js', 'w') as f:
