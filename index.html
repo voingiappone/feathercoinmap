@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
 <link href="MarkerCluster.Default.ie.css" rel="stylesheet" type="text/css" />
 <![endif]-->
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
 <script src="leaflet.markercluster.js"></script>
 <!--
@@ -22,7 +24,7 @@
 <script src="data/coins.js"></script>
 <script src="coinmap.js"></script>
 <script src="coinmap-icons.js"></script>
-<script src="data/data-overpass.js"></script>
+<script src="coinmap-overpass.js"></script>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <link rel="icon" type="image/png" href="icons/_bitcoin.png" />
 <meta name="bitcoin" content="1BnpG4jddgNXsQBQjsU8BS3F1Ubm9XgVah" />
@@ -40,7 +42,7 @@ Example: <strong>payment:bitcoin=yes</strong> or <strong>payment:litecoin=yes</s
 
 Donations are welcome at <a href="bitcoin:1BnpG4jddgNXsQBQjsU8BS3F1Ubm9XgVah">1BnpG4jddgNXsQBQjsU8BS3F1Ubm9XgVah</a><br/>
 
-Venue data are updated every hour. Currently there are <span id="count"><b>0</b></span> places on the map.
+Venue data are updated every hour. Currently there are <span id="total_count"><b>0</b></span> places on the map.
 <br/>
 
 Official <a href="https://bitcointalk.org/index.php?topic=175900">BitcoinTalk thread</a> | Source code available from <a href="https://github.com/prusnak/coinmap" target="_blank">Github</a><br/>

@@ -1,13 +1,11 @@
+window.coinmap_icons = {};
 var specials = [
 'bitcoin',
 'litecoin',
-'localbitcoins',
-'zipzap'
 ];
 for (var i = 0; i < specials.length; i++) {
-	window['icon_' + specials[i]] = L.icon({iconUrl:'icons/_' + specials[i] + '.png', iconSize: [24,24]});
+	window.coinmap_icons[specials[i]] = L.icon({iconUrl:'icons/_' + specials[i] + '.png', iconSize: [24,24]});
 }
-
 var icons = [
 'accommodation_alpinehut',
 'accommodation_bed_and_breakfast',
@@ -151,5 +149,5 @@ var icons = [
 'transport_zebracrossing',
 ];
 for (var i = 0; i < icons.length; i++) {
-	window['icon_' + icons[i]] = L.icon({iconUrl:'icons/' + icons[i] + '.n.24.png', iconSize: [24,24]});
+	window.coinmap_icons[icons[i]] = L.icon({iconUrl:'icons/' + icons[i] + '.n.24.png', iconSize: [24,24]});
 }
