@@ -200,7 +200,7 @@ def write_elements(f, e, currency):
   else:
     name = '%s %s' % (typ, ide)
 
-  icon = determine_icon(tags)
+  icon = determine_icon(tags, currency)
   popup = '<b>%s</b> <a href=\\"http://openstreetmap.org/browse/%s/%s\\" target=\\"_blank\\">*</a><hr/>' % (name, typ, ide)
   if 'addr:street' in tags:
     popup += '%s %s<br/>' % (tags.get('addr:street', ''), tags.get('addr:housenumber', ''))
