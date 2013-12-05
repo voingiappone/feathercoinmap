@@ -37,7 +37,7 @@ function coinmap() {
     "Watercolor": tileWatercolor,
   }).addTo(map);
 
-  var c_clusters;
+  var c_clusters = {};
   var currencies = get_currencies();
   for (var i = currencies.length - 1; i >= 0; i--) {
     c_clusters[currencies[i]] = new L.MarkerClusterGroup({showCoverageOnHover: false, maxClusterRadius: 32});
