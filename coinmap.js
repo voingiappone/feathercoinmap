@@ -37,14 +37,21 @@ function coinmap() {
     "Watercolor": tileWatercolor,
   }).addTo(map);
 
-  var markers = new L.MarkerClusterGroup({showCoverageOnHover: false, maxClusterRadius: 32});
+  var c_clusters;
+  var currencies = get_currencies();
+  for (var i = currencies.length - 1; i >= 0; i--) {
+    c_clusters[currencies[i]] = new L.MarkerClusterGroup({showCoverageOnHover: false, maxClusterRadius: 32});
+  }
 
-  coinmap_populate_overpass(markers);
+
+  coinmap_populate_overpass(c_clusters);
 //  coinmap_populate_localbitcoins(markers);
 //  coinmap_populate_zipzap(markers);
 
-  map.addLayer(markers);
-  
+  for (var i = c_clusters.length - 1; i >= 0; i--) {
+    map.addLayer(c_clusters[i]);
+  }
+
   map.on('moveend', function(e){
     if(map.getZoom() >= 13){
       document.getElementById("osm_edit_link").href = "http://www.openstreetmap.org/edit#map=" + map.getZoom() + "/" + map.getCenter().lat.toFixed(6) + "/" + map.getCenter().lng.toFixed(6);
