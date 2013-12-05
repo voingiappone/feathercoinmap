@@ -27,22 +27,31 @@ function coinmap() {
     maxZoom: 18
   });
 
-  var map = L.map('map',
-    {
-      center: [0, 0],
-      zoom: 3,
-      layers: [tileOSM],
-      worldCopyJump: true
-    });
 
   var c_clusters = {};
   var currencies = get_currencies();
   for (var i = currencies.length - 1; i >= 0; i--) {
     c_clusters[currencies[i]] = new L.MarkerClusterGroup({showCoverageOnHover: false, maxClusterRadius: 32});
   }
-
-
   coinmap_populate_overpass(c_clusters);
+  //coinmap_populate_localbitcoins(markers);
+  //coinmap_populate_zipzap(markers);
+
+
+  var map_layers = [tileOSM];
+  for (var i = currencies.length - 1; i >= 0; i--) {
+    map_layers.push(c_clusters[currencies[i]]);
+  }
+
+  var map = L.map('map',
+    {
+      center: [0, 0],
+      zoom: 3,
+      layers: map_layers,
+      worldCopyJump: true
+    });
+
+
 
   var layers = L.control.layers({
     "OpenStreetMap": tileOSM,
@@ -55,8 +64,6 @@ function coinmap() {
   }).addTo(map);
 
 
-  //coinmap_populate_localbitcoins(markers);
-  //coinmap_populate_zipzap(markers);
 
   map.on('moveend', function(e){
     if(map.getZoom() >= 13){
