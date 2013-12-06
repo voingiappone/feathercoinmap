@@ -1,4 +1,3 @@
-import cgi
 import requests
 
 icon_mapping = {
@@ -177,9 +176,6 @@ def get_points(coin = 'bitcoin'):
 		lon = e.get('lon', None)
 		typ = e['type']
 		tags = e.get('tags', {})
-		for k in tags.keys():
-				if tags[k]:
-					tags[k] = cgi.escape(tags[k]).replace('"', '\\"')
 		ide = e['id']
 
 		if typ == 'node':
