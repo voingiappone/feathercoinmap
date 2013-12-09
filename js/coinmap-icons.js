@@ -4,7 +4,7 @@ var specials = [
 'litecoin',
 ];
 for (var i = 0; i < specials.length; i++) {
-	window.coinmap_icons[specials[i]] = L.icon({iconUrl:'icons/_' + specials[i] + '.png', iconSize: [24,24]});
+	window.coinmap_icons[specials[i]] = L.icon({iconUrl:'img/' + specials[i] + '.png', iconSize: [24,24]});
 }
 var icons = [
 'accommodation_alpinehut',
@@ -149,5 +149,5 @@ var icons = [
 'transport_zebracrossing',
 ];
 for (var i = 0; i < icons.length; i++) {
-	window.coinmap_icons[icons[i]] = L.icon({iconUrl:'icons/' + icons[i] + '.n.24.png', iconSize: [24,24]});
+	window.coinmap_icons[icons[i]] = L.icon({iconUrl:'img/map/' + icons[i] + '.n.24.png', iconSize: [24,24]});
 }

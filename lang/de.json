@@ -1,0 +1,9 @@
+{
+	"how-to": "So listen Ihrem Ort gehen Sie zum <a id='osm_edit_link' href='http://www.openstreetmap.org/edit' target='_blank'>OpenStreetMap Editor</a> und fügen Sie das <strong>payment:bitcoin=yes</strong> Tag (oder <strong>payment:litecoin=yes</strong> für Litecoin).",
+	"please-on-ground": "Bitte keine neuen Spielstätten zu schaffen, es sei denn sie haben <a href='http://de.wikipedia.org/wiki/Brick_and_Mortar'>physische Präsenz</a> auf dem Boden!",
+	"every-hour": "Veranstaltungsort Daten werden stündlich aktualisiert. Derzeit gibt es",
+	"and-": "und",
+	"places": "Orte auf der Karte.",
+	"official-thread-source": "Offizieller <a href='https://bitcointalk.org/index.php?topic=175900'>BitcoinTalk thread</a> | Quellcode verfügbar von <a href='https://github.com/prusnak/coinmap' target='_blank'>Github</a>",
+	"donations": "Spenden sind willkommen bei <a href='bitcoin:1BnpG4jddgNXsQBQjsU8BS3F1Ubm9XgVah'>1BnpG4jddgNXsQBQjsU8BS3F1Ubm9XgVah</a> und <a href='litecoin:LLTbGv9HtFPM5zeWJx9p6GGYhDGr5K4uQE'>LLTbGv9HtFPM5zeWJx9p6GGYhDGr5K4uQE</a>."
+}

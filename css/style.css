@@ -31,26 +31,12 @@ body {
   z-index: 7;
   line-height: 200%;
 }
+
 #footer {
   color: #333;
   left: 0px;
   bottom: 0px;
 }
-
-#lang {
-  left: 7%;
-  top: 1%;
-  color: #999999;
-}
-
-#lang a {
-  text-decoration: none;
-}
-
-#lang a:hover {
-  border-bottom: 1px dashed;
-}
-
 
 a {
   color: #0078A8;
@@ -59,6 +45,20 @@ a {
 img.leaflet-marker-icon {
   box-shadow: 0px 0px 16px #000000;
   border-radius: 12px;
+}
+
+#lang {
+  left: 10px;
+  top: 110px;
+  width: 18px;
+  color: #AAAAAA;
+}
+
+#lang img {
+}
+
+#lang a {
+  cursor: pointer;
 }
 
 /* hides footer in small screen */

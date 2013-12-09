@@ -11,4 +11,4 @@ Donations welcome at:
 
 Licensed under [Affero General Public License 3](http://www.gnu.org/licenses/agpl-3.0.html)
 Map Data © by [OpenStreetMap contributors](http://www.openstreetmap.org/copyright)
-Icons CC-0 by [Brian Quinion](http://www.sjjb.co.uk/mapicons/)
+Map Icons CC-0 by [Brian Quinion](http://www.sjjb.co.uk/mapicons/)
