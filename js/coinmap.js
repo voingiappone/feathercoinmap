@@ -82,4 +82,37 @@ function coinmap() {
 	}) );
 
 	// map.addControl(new L.Control.Permalink({text: 'Permalink', layers: layers, position: "none", useLocation: true}));
+  
+  // Localization
+  localizeAll($.cookie('lang'));
+  
+  $('#en').click(function() {
+    $.cookie('lang', 'en', { expires: 365 });
+    localizeAll('en');
+  });
+
+  $('#ru').click(function() {
+    $.cookie('lang', 'ru', { expires: 365 });
+    localizeAll('ru');
+  });
+
 }
+function l(string, fallback) {
+	var localized = string.toLocaleString();
+	if (localized !== string) {
+		return localized;
+	}
+  else {
+		return fallback;
+	}
+}
+
+function localizeAll(lang) {
+  String.locale = lang;
+  $('[data-l10n]').each(function(i) {
+    $(this).html(l($(this).attr('data-l10n'),$(this).html()));
+  });
+  document.documentElement.lang = String.locale;
+}
+
+
