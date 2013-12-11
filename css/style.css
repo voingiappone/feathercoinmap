@@ -38,6 +38,28 @@ body {
   bottom: 0px;
 }
 
+#footer.closed {
+  display: none;
+}
+
+#btn_footer_open.opened {
+  display:none;
+}
+
+#btn_footer_open.opened {
+  color: #333;
+  left: 0px;
+  bottom: 0px;
+  font-size: 13px;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 5px #bbb;
+  padding: 0 5px;
+  z-index: 7;
+  line-height: 200%;
+  display: block;
+}
+
 a {
   color: #0078A8;
 }

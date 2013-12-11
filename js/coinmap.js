@@ -92,6 +92,15 @@ function coinmap() {
 	$('#it').click(function() { $.cookie('lang', 'it', { expires: 365 }); localizeAll('it'); });
 	$('#ru').click(function() { $.cookie('lang', 'ru', { expires: 365 }); localizeAll('ru'); });
 	$('#sk').click(function() { $.cookie('lang', 'sk', { expires: 365 }); localizeAll('sk'); });
+
+	$('#btn_footer_close').click(function() {
+		$('#footer').toggleClass('closed');
+		$('#btn_footer_open').toggleClass('opened');
+	});
+	$('#btn_footer_open').click(function() {
+		$('#footer').toggleClass('closed');
+		$('#btn_footer_open').toggleClass('opened');
+	});
 }
 
 function l(string, fallback) {
