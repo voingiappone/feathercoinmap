@@ -86,11 +86,12 @@ function coinmap() {
 	// localization
 	localizeAll($.cookie('lang'));
 
+	$('#cz').click(function() { $.cookie('lang', 'cz', { expires: 365 }); localizeAll('cz'); });
 	$('#de').click(function() { $.cookie('lang', 'de', { expires: 365 }); localizeAll('de'); });
 	$('#en').click(function() { $.cookie('lang', 'en', { expires: 365 }); localizeAll('en'); });
 	$('#it').click(function() { $.cookie('lang', 'it', { expires: 365 }); localizeAll('it'); });
 	$('#ru').click(function() { $.cookie('lang', 'ru', { expires: 365 }); localizeAll('ru'); });
-	$('#cz').click(function() { $.cookie('lang', 'cz', { expires: 365 }); localizeAll('cz'); });
+	$('#sk').click(function() { $.cookie('lang', 'sk', { expires: 365 }); localizeAll('sk'); });
 }
 
 function l(string, fallback) {
