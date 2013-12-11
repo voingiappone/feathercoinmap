@@ -88,6 +88,7 @@ function coinmap() {
 
 	$('#de').click(function() { $.cookie('lang', 'de', { expires: 365 }); localizeAll('de'); });
 	$('#en').click(function() { $.cookie('lang', 'en', { expires: 365 }); localizeAll('en'); });
+	$('#it').click(function() { $.cookie('lang', 'it', { expires: 365 }); localizeAll('it'); });
 	$('#ru').click(function() { $.cookie('lang', 'ru', { expires: 365 }); localizeAll('ru'); });
 }
 
