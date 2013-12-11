@@ -90,6 +90,7 @@ function coinmap() {
 	$('#en').click(function() { $.cookie('lang', 'en', { expires: 365 }); localizeAll('en'); });
 	$('#it').click(function() { $.cookie('lang', 'it', { expires: 365 }); localizeAll('it'); });
 	$('#ru').click(function() { $.cookie('lang', 'ru', { expires: 365 }); localizeAll('ru'); });
+	$('#cz').click(function() { $.cookie('lang', 'cz', { expires: 365 }); localizeAll('cz'); });
 }
 
 function l(string, fallback) {
