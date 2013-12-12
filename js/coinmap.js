@@ -90,6 +90,8 @@ function coinmap() {
 	$('#de').click(function() { $.cookie('lang', 'de', { expires: 365 }); localizeAll('de'); });
 	$('#en').click(function() { $.cookie('lang', 'en', { expires: 365 }); localizeAll('en'); });
 	$('#it').click(function() { $.cookie('lang', 'it', { expires: 365 }); localizeAll('it'); });
+	$('#jp').click(function() { $.cookie('lang', 'jp', { expires: 365 }); localizeAll('jp'); });
+	$('#pt_br').click(function() { $.cookie('lang', 'pt_br', { expires: 365 }); localizeAll('pt_br'); });
 	$('#ru').click(function() { $.cookie('lang', 'ru', { expires: 365 }); localizeAll('ru'); });
 	$('#sk').click(function() { $.cookie('lang', 'sk', { expires: 365 }); localizeAll('sk'); });
 
