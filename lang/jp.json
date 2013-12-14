@@ -8,7 +8,7 @@
 	"donations": "寄付は <a href='bitcoin:1BnpG4jddgNXsQBQjsU8BS3F1Ubm9XgVah'>1BnpG4jddgNXsQBQjsU8BS3F1Ubm9XgVah</a> と <a href='litecoin:LLTbGv9HtFPM5zeWJx9p6GGYhDGr5K4uQE'>LLTbGv9HtFPM5zeWJx9p6GGYhDGr5K4uQE</a> で大歓迎です.",
 	"close-": "閉じる",
 	"about-project": "プロジェクトについて",
-  "website": "website",
-  "email": "email",
-  "phone": "phone
+	"website-": "ウェブサイト",
+	"email": "電子メイル",
+	"phone-": "電話"
 }

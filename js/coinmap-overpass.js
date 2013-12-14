@@ -17,13 +17,13 @@ function coinmap_populate_overpass(cluster, coin) {
 			}
 			popup += '<hr/>';
 			if (val['web']) {
-				popup += '<span data-l10n="website">website</span>: <a href="' + val['web'] + '" target="_blank">' + val['web'] + '</a><br/>';
+				popup += '<span data-l10n="website-">website</span>: <a href="' + val['web'] + '" target="_blank">' + val['web'] + '</a><br/>';
 			}
 			if (val['email']) {
-				popup += '<span data-l10n="email">email</span>: <a href="mailto:' + val['email'] + '" target="_blank">' + val['email'] + '</a><br/>';
+				popup += '<span data-l10n="email">e-mail</span>: <a href="mailto:' + val['email'] + '" target="_blank">' + val['email'] + '</a><br/>';
 			}
 			if (val['phone']) {
-				popup += '<span data-l10n="phone">phone</span>: ' + val['phone'] + '<br/>';
+				popup += '<span data-l10n="phone-">phone</span>: ' + val['phone'] + '<br/>';
 			}
 			if (val['desc']) {
 				popup += val['desc'] + '<br/>';

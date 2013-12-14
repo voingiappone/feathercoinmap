@@ -87,10 +87,8 @@ img.leaflet-marker-icon {
   font-size: 20px;
   font-weight: bold;
   line-height: 18px;
-  color: #000000;
+  color: #404040;
   text-shadow: 0 1px 0 #ffffff;
-  opacity: 0.2;
-  filter: alpha(opacity=20);
   text-decoration: none;
   float: right;
   margin-left: 5px
@@ -103,7 +101,6 @@ img.leaflet-marker-icon {
   filter: alpha(opacity=40);
   cursor: pointer;
 }
-
 
 /* hides footer in small screen */
 @media (max-width: 780px) {
