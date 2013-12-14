@@ -7,5 +7,8 @@
 	"official-thread-source": "オフィシャルフォーラム（英語のみ） <a href='https://bitcointalk.org/index.php?topic=175900'>BitcoinTalk thread</a> | ソースコードは <a href='https://github.com/prusnak/coinmap' target='_blank'>GitHub</a> で見つけれます",
 	"donations": "寄付は <a href='bitcoin:1BnpG4jddgNXsQBQjsU8BS3F1Ubm9XgVah'>1BnpG4jddgNXsQBQjsU8BS3F1Ubm9XgVah</a> と <a href='litecoin:LLTbGv9HtFPM5zeWJx9p6GGYhDGr5K4uQE'>LLTbGv9HtFPM5zeWJx9p6GGYhDGr5K4uQE</a> で大歓迎です.",
 	"close-": "閉じる",
-	"about-project": "プロジェクトについて"
+	"about-project": "プロジェクトについて",
+  "website": "website",
+  "email": "email",
+  "phone": "phone
 }

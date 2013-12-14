@@ -6,6 +6,9 @@
 	"places": "мест.",
 	"official-thread-source": "Официальный <a href='https://bitcointalk.org/index.php?topic=175900'>тред на BitcoinTalk</a> | Исходный код доступен на <a href='https://github.com/prusnak/coinmap' target='_blank'>GitHub</a>",
 	"donations": "Пожертвования принимаются на адреса <a href='bitcoin:1BnpG4jddgNXsQBQjsU8BS3F1Ubm9XgVah'>1BnpG4jddgNXsQBQjsU8BS3F1Ubm9XgVah</a> и <a href='litecoin:LLTbGv9HtFPM5zeWJx9p6GGYhDGr5K4uQE'>LLTbGv9HtFPM5zeWJx9p6GGYhDGr5K4uQE</a>.",
-	"close-": "закрывать",
-	"about-project": "О проекте"
+	"close-": "Закрыть",
+	"about-project": "О проекте",
+  "website": "Вебсайт",
+  "email": "Электронная почта",
+  "phone": "Телефон"
 }

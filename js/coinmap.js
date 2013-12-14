@@ -120,5 +120,6 @@ function localizeAll(lang) {
 	$('[data-l10n]').each(function(i) {
 		$(this).html(l($(this).attr('data-l10n'),$(this).html()));
 	});
+  $('#btn_footer_close').attr('title', l('close', 'Close'));
 	document.documentElement.lang = String.locale;
 }
