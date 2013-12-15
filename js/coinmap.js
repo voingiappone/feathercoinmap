@@ -1,3 +1,5 @@
+var knownLanguages = ["cz","de","en","it","jp","pt_br","ru","sk"];
+
 function coinmap() {
 
 	var tileOSM = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -84,16 +86,20 @@ function coinmap() {
 	// map.addControl(new L.Control.Permalink({text: 'Permalink', layers: layers, position: "none", useLocation: true}));
 
 	// localization
-	localizeAll($.cookie('lang'));
-
-	$('#cz').click(function() { $.cookie('lang', 'cz', { expires: 365 }); localizeAll('cz'); });
-	$('#de').click(function() { $.cookie('lang', 'de', { expires: 365 }); localizeAll('de'); });
-	$('#en').click(function() { $.cookie('lang', 'en', { expires: 365 }); localizeAll('en'); });
-	$('#it').click(function() { $.cookie('lang', 'it', { expires: 365 }); localizeAll('it'); });
-	$('#jp').click(function() { $.cookie('lang', 'jp', { expires: 365 }); localizeAll('jp'); });
-	$('#pt_br').click(function() { $.cookie('lang', 'pt_br', { expires: 365 }); localizeAll('pt_br'); });
-	$('#ru').click(function() { $.cookie('lang', 'ru', { expires: 365 }); localizeAll('ru'); });
-	$('#sk').click(function() { $.cookie('lang', 'sk', { expires: 365 }); localizeAll('sk'); });
+	var preferredLanguage = $.cookie('lang') || window.navigator.userLanguage || window.navigator.language;
+	if(knownLanguages.indexOf(preferredLanguage) > -1){
+		localizeAll(preferredLanguage);
+	}
+	else if(knownLanguages.indexOf(preferredLanguage.split("-")[0]) > -1){
+		localizeAll(preferredLanguage.split("-")[0]);
+	}
+	else if(knownLanguages.indexOf(preferredLanguage.replace("-","_")) > -1){
+		localizeAll(preferredLanguage.replace("-","_"));
+	}
+	
+	$.each(knownLanguages, function(i, lang){
+		$('#' + lang).click(function() { $.cookie('lang', lang, { expires: 365 }); localizeAll(lang); });
+	}
 
 	$('#btn_footer_close').click(function() {
 		$('#footer').toggleClass('closed');
