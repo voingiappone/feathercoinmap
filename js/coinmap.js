@@ -99,7 +99,7 @@ function coinmap() {
 	
 	$.each(knownLanguages, function(i, lang){
 		$('#' + lang).click(function() { $.cookie('lang', lang, { expires: 365 }); localizeAll(lang); });
-	}
+	});
 
 	$('#btn_footer_close').click(function() {
 		$('#footer').toggleClass('closed');
