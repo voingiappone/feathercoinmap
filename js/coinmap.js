@@ -39,7 +39,7 @@ function coinmap() {
 	for (var i = 0; i < coins.length; i++) {
 		coinmap_populate_overpass(coin_clusters[coins[i]], coins[i]);
 	}
-	var map_layers = [tileOSM];
+	var map_layers = [tileMapQuest];
 	map_layers.push(coin_clusters[coins[0]]); // enable just first coin
 
 	var map = L.map('map', {
