@@ -70,8 +70,8 @@ img.leaflet-marker-icon {
 }
 
 #lang {
-  left: 10px;
-  top: 110px;
+  left: 0px;
+  top: 250px;
   width: 18px;
   color: #AAAAAA;
 }
