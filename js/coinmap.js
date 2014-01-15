@@ -32,7 +32,7 @@ function coinmap() {
 	var coin_clusters = {};
 	var coins = get_coins();
 	for (var i = 0; i < coins.length; i++) {
-		coin_clusters[coins[i]] = new L.MarkerClusterGroup({showCoverageOnHover: false, maxClusterRadius: 32});
+		coin_clusters[coins[i]] = new L.MarkerClusterGroup({showCoverageOnHover: false, maxClusterRadius: 54});
 	}
 
 	window.total_count = 0;
