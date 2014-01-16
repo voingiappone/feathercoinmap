@@ -10,7 +10,8 @@ for (var i = 0; i < specials.length; i++) {
 		iconSize: [24,24],
 		shadowSize: [34, 49],
 		iconAnchor: [12, 44],
-		shadowAnchor: [17, 48]
+		shadowAnchor: [17, 48],
+		popupAnchor:  [0, -50]
 	});
 }
 var icons = [
@@ -162,6 +163,7 @@ for (var i = 0; i < icons.length; i++) {
 		iconSize: [24,24],
 		shadowSize: [34, 49],
 		iconAnchor: [12, 44],
-		shadowAnchor: [17, 48]
+		shadowAnchor: [17, 48],
+		popupAnchor:  [0, -50]
 	});
 }
