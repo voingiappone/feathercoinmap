@@ -64,10 +64,6 @@ a {
   color: #0078A8;
 }
 
-img.leaflet-marker-icon {
-  border-radius: 12px;
-}
-
 #lang {
   left: 0px;
   top: 250px;
