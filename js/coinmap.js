@@ -66,7 +66,54 @@ function coinmap() {
 		else{
 			document.getElementById("osm_edit_link").href = "http://www.openstreetmap.org/edit#map=13/" + map.getCenter().lat.toFixed(6) + "/" + map.getCenter().lng.toFixed(6);
 		}
-	});
+    });
+    var redrawVenues = function(e) {
+        //I have no experience with leaflet, so maybe this is too "hacked" on
+        var inBounds = [],
+        bounds = map.getBounds();
+        
+        coins.forEach(function (coinName) {
+            coinLayer=coin_clusters[coinName];
+            if (!map.hasLayer(coinLayer)) {
+                return;
+            }
+            coinLayer.eachLayer(function(layer) {
+                        if (bounds.contains(layer.getLatLng())) {
+                            right_html='<div class="placename">'+layer.options.title+'</div>';
+                            var newdiv = $( right_html )
+                            $(newdiv).click(
+                                function() {
+                                    //this is needed to get over clusters
+                                    var visible = coinLayer.getVisibleParent(layer);
+                                    visible.bindPopup(layer.getPopup()).openPopup();
+                                }
+                            );                        //title for sorting
+                            inBounds.push({div:newdiv,title:layer.options.title});
+                        }
+            });
+            var marker_html;
+            inBounds.sort(function(a,b){
+                //no idea what will it do with chinese/arabic, but should work
+                return a.title.localeCompare(b.title);
+            });
+            //these are not yet translated, I am not sure how localization works
+            //(and I am too lazy to localize in the first place)
+            if (inBounds.length==0) {
+                marker_html="<span data-l10n='no-visible'>No venues visible.</span>";
+            } else {
+                marker_html="<div class='on-map-top'> <span data-l10n='on-the-map'>Currently visible ("+inBounds.length+")</span></div><div class='leaflet-control-layers-separator'></div>";
+            }
+
+            document.getElementById('marker-list').innerHTML = marker_html; 
+            inBounds.forEach(function(object){
+                $('#marker-list').append(object.div);
+            });
+            $('#marker-above').show();
+        });
+    };
+    map.on('moveend', redrawVenues);
+    map.on('overlayremove', redrawVenues);
+    map.on('overlayadd', redrawVenues);
 
 	map.locate({setView: true, maxZoom: 12});
 
