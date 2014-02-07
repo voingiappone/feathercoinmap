@@ -211,14 +211,12 @@ def get_points(coin = 'bitcoin'):
 			point['country'] = tags.get('addr:country', '')
 		if 'contact:website' in tags:
 			w = tags['contact:website']
-			if not w.startswith('http'):
-				w = 'http://' + w
-			point['web'] = w
+			if w.startswith('http://') or w.startswith('https://'):
+				point['web'] = w
 		elif 'website' in tags:
 			w = tags['website']
-			if not w.startswith('http'):
-				w = 'http://' + w
-			point['web'] = w
+			if w.startswith('http://') or w.startswith('https://'):
+				point['web'] = w
 		if 'contact:email' in tags:
 			point['email'] = tags['contact:email']
 		elif 'email' in tags:
