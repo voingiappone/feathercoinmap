@@ -1,6 +1,6 @@
 {
-	"how-to": "Um einen Ort hinzuzufügen besuchen sie <a id='osm_edit_link' href='http://www.openstreetmap.org/edit' target='_blank'> OpenStreetMap Editor</a> und fügen sie das Tag <strong>payment:bitcoin=yes</strong> (oder <strong>payment:litecoin=yes</strong> für Litecoin) hinzu.",
-	"please-on-ground": "Bitte fügen sie nur Geschäfte hinzu bei denen der Kunde die <a href='http://de.wikipedia.org/wiki/Brick_and_Mortar'>Geschäfts- oder Verkaufsräumen</a> besuchen kann.",
+	"how-to": "Um einen Ort hinzuzufügen besuchen Sie <a id='osm_edit_link' href='http://www.openstreetmap.org/edit' target='_blank'> OpenStreetMap Editor</a> und fügen Sie das Tag <strong>payment:bitcoin=yes</strong> (oder <strong>payment:litecoin=yes</strong> für Litecoin) hinzu.",
+	"please-on-ground": "Bitte fügen Sie nur Geschäfte hinzu bei denen der Kunde die <a href='http://de.wikipedia.org/wiki/Brick_and_Mortar'>Geschäfts- oder Verkaufsräumen</a> besuchen kann.",
 	"every-hour": "Die Daten werden stündlich aktualisiert. Derzeit gibt es",
 	"and-": "und",
 	"places": "Akzeptanzstellen auf der Karte.",
