@@ -144,13 +144,24 @@ function coinmap() {
 	});
 
 	$('#btn_footer_close').click(function() {
-		$('#footer').toggleClass('closed');
-		$('#btn_footer_open').toggleClass('opened');
+		setFooter('closed');
 	});
 	$('#btn_footer_open').click(function() {
-		$('#footer').toggleClass('closed');
-		$('#btn_footer_open').toggleClass('opened');
+		setFooter('opened');
 	});
+	setFooter(localStorage.getItem('footerState'));
+}
+
+function setFooter(state) {
+	if (state == 'opened') {
+		$('#footer').removeClass('closed');
+		$('#btn_footer_open').removeClass('opened');
+	}
+	else if (state == 'closed') {
+		$('#footer').addClass('closed');
+		$('#btn_footer_open').addClass('opened');
+	}
+	localStorage.setItem('footerState', state);
 }
 
 function l(string, fallback) {
