@@ -149,7 +149,9 @@ function coinmap() {
 	$('#btn_footer_open').click(function() {
 		setFooter('opened');
 	});
-	setFooter(localStorage.getItem('footerState'));
+	if (localStorage) {
+		setFooter(localStorage.getItem('footerState'));
+	}
 }
 
 function setFooter(state) {
@@ -161,7 +163,9 @@ function setFooter(state) {
 		$('#footer').addClass('closed');
 		$('#btn_footer_open').addClass('opened');
 	}
-	localStorage.setItem('footerState', state);
+	if (localStorage) {
+		localStorage.setItem('footerState', state);
+	}
 }
 
 function l(string, fallback) {
