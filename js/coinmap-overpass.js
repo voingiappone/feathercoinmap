@@ -5,7 +5,6 @@ function coinmap_populate_overpass(cluster, coin) {
 			var lat = val['lat'];
 			var lon = val['lon'];
 			var title = val['title'];
-			var icon = window.coinmap_icons[val['icon']];
 			var popup = '<b>' + val['title'] + '</b> <a href="http://openstreetmap.org/browse/' + val['type'] + '/' + val['id'] + '" target="_blank">*</a><hr/>';
 			if (val['addr']) {
 				popup += val['addr'] + '<br/>';
@@ -29,7 +28,13 @@ function coinmap_populate_overpass(cluster, coin) {
 			if (val['desc']) {
 				popup += val['desc'] + '<br/>';
 			}
-			L.marker([lat, lon], {"title": title, icon: icon}).bindPopup(popup).addTo(cluster);
+			var icon = val['icon'];
+			var promoted = false;
+			if (promoted) {
+				icon += '.p';
+			}
+			icon = window.coinmap_icons[icon];
+			L.marker([lat, lon], {"title": title, "icon": icon}).bindPopup(popup).addTo(cluster);
 		});
 		document.getElementById(coin + "_count").innerHTML = data.length;
 	});

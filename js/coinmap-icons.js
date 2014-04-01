@@ -1,20 +1,22 @@
 window.coinmap_icons = {};
-var specials = [
-'bitcoin',
-'litecoin',
-];
-for (var i = 0; i < specials.length; i++) {
-	window.coinmap_icons[specials[i]] = L.icon({
-		iconUrl:'img/' + specials[i] + '.png',
-		shadowUrl: 'img/shadow.png',
-		iconSize: [24,24],
-		shadowSize: [34, 49],
-		iconAnchor: [12, 44],
-		shadowAnchor: [17, 48],
-		popupAnchor:  [0, -50]
+
+var addIcon = function(str, icon, promoted) {
+	var size = promoted ? '32' : '24';
+	var color = promoted ? 'F7931A' : '999999';
+	window.coinmap_icons[str] = L.icon({
+		iconUrl:'img/map/' + icon + '.n.' + color + '.' + size + '.png',
+		shadowUrl: 'img/shadow.' + size + '.png',
+		iconSize: promoted ? [32,32] : [24,24],
+		shadowSize: promoted ? [44, 58] : [36, 50],
+		iconAnchor: promoted ? [16, 50] : [12, 42],
+		shadowAnchor: promoted ? [22, 57] : [18, 49],
+		popupAnchor: promoted ? [0, -58] : [0, -50]
 	});
 }
+
 var icons = [
+'_bitcoin',
+'_litecoin',
 'accommodation_alpinehut',
 'accommodation_bed_and_breakfast',
 'accommodation_camping',
@@ -156,14 +158,8 @@ var icons = [
 'transport_weir',
 'transport_zebracrossing',
 ];
+
 for (var i = 0; i < icons.length; i++) {
-	window.coinmap_icons[icons[i]] = L.icon({
-		iconUrl:'img/map/' + icons[i] + '.n.24.png',
-		shadowUrl: 'img/shadow.png',
-		iconSize: [24,24],
-		shadowSize: [34, 49],
-		iconAnchor: [12, 44],
-		shadowAnchor: [17, 48],
-		popupAnchor:  [0, -50]
-	});
+	addIcon(icons[i], icons[i]);
+	addIcon(icons[i] + '.p', icons[i], true);
 }

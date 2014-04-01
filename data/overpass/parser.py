@@ -154,7 +154,7 @@ nodes = {}
 ways = {}
 
 def determine_icon(tags, coin = 'bitcoin'):
-	icon = coin
+	icon = '_' + coin
 	for kv in icon_mapping:
 		k,v = kv.split(':')
 		t = tags.get(k)
