@@ -97,13 +97,15 @@ a {
   cursor: pointer;
 }
 
-/* hides footer in small screen */
+/* hides footer and marker-list on small screen */
 @media (max-width: 780px) {
   #footer {
     display: none;
   }
+  #marker-list {
+    display: none;
+  }
 }
-
 
 .leaflet-almost-top {
    position: absolute;
