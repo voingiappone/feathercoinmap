@@ -17,7 +17,7 @@ parsers = {
 
 # update data/currencies
 with open(scriptdir + '/coins.js', 'w') as f:
-	f.write('function get_coins() { return ["%s"]; }\n' % '", "'.join(coins))
+	f.write('function get_coins() { return ["%s"]; }\n' % '", "'.join(sorted(coins.keys())))
 
 # call individual parsers
 for name, parser in parsers.iteritems():
