@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="266"
-   height="58"
+   width="217.13562"
+   height="72.187462"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="logo.svg"
-   inkscape:export-filename="/home/stick/work/scm/prusnak/coinmap/img/logo.png"
+   sodipodi:docname="coinmap.svg"
+   inkscape:export-filename="coinmap.png"
    inkscape:export-xdpi="180"
    inkscape:export-ydpi="180">
   <defs
@@ -42,16 +42,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="139.48479"
-     inkscape:cy="22.287831"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="119.10772"
+     inkscape:cy="26.919987"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0"
+     fit-margin-top="10"
+     fit-margin-left="10"
+     fit-margin-right="10"
+     fit-margin-bottom="10"
      inkscape:window-width="1920"
      inkscape:window-height="1129"
      inkscape:window-x="0"
@@ -64,19 +64,26 @@
      inkscape:bbox-nodes="true"
      inkscape:snap-bbox-edge-midpoints="true"
      inkscape:snap-bbox-midpoints="true"
-     inkscape:snap-global="true">
+     inkscape:snap-global="true"
+     inkscape:object-paths="false"
+     inkscape:snap-midpoints="true"
+     inkscape:snap-object-midpoints="true">
     <sodipodi:guide
        orientation="0,1"
-       position="31.687223,14.981825"
+       position="-10.000787,23.436093"
        id="guide3004" />
     <sodipodi:guide
        orientation="0,1"
-       position="42.031,55.031"
+       position="99.5,62.187467"
        id="guide3006" />
     <sodipodi:guide
        orientation="0,1"
-       position="21.999875,1.5"
+       position="129.625,10.000001"
        id="guide3766" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="51.87449,81.923018"
+       id="guide3087" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -94,28 +101,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-393.69669,-516.14957)">
-    <path
-       style="fill:#f7931a;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 6.59375,-4.531 C 4.3015785,-4.531 2.46875,-2.6981715 2.46875,-0.406 L 2.46875,30.40625 C 2.46875,32.698421 4.3015785,34.53125 6.59375,34.53125 L 16.375,34.53125 L 22,48 L 27.625,34.53125 L 37.406,34.53125 C 39.698171,34.53125 41.531,32.698421 41.531,30.40625 L 41.531,-0.406 C 41.531,-2.6981715 39.698171,-4.531 37.406,-4.531 z"
-       id="path3052"
-       inkscape:connector-curvature="0"
-       transform="translate(393.69669,524.14957)"
-       sodipodi:nodetypes="sssscccsssss" />
-    <g
-       id="g105"
-       style="fill:#ffffff;fill-opacity:1"
-       transform="matrix(0.76727271,0,0,0.77299041,240.9965,481.14053)">
-      <g
-         id="g107"
-         style="fill:#ffffff;fill-opacity:1">
-        <path
-           inkscape:connector-curvature="0"
-           style="fill:#ffffff;fill-opacity:1"
-           id="path109"
-           d="M 241.91,70.689 C 242.547,66.431 239.305,64.142 234.872,62.615 L 236.31,56.847 L 232.799,55.972 L 231.399,61.588 C 230.476,61.358 229.528,61.141 228.586,60.926 L 229.996,55.273 L 226.487,54.398 L 225.048,60.164 C 224.284,59.99 223.534,59.818 222.806,59.637 L 222.81,59.619 L 217.968,58.41 L 217.034,62.16 C 217.034,62.16 219.639,62.757 219.584,62.794 C 221.006,63.149 221.263,64.09 221.22,64.836 L 219.582,71.407 C 219.68,71.432 219.807,71.468 219.947,71.524 C 219.83,71.495 219.705,71.463 219.576,71.432 L 217.28,80.637 C 217.106,81.069 216.665,81.717 215.671,81.471 C 215.706,81.522 213.119,80.834 213.119,80.834 L 211.376,84.853 L 215.945,85.992 C 216.795,86.205 217.628,86.428 218.448,86.638 L 216.995,92.472 L 220.502,93.347 L 221.941,87.575 C 222.899,87.835 223.829,88.075 224.739,88.301 L 223.305,94.046 L 226.816,94.921 L 228.269,89.098 C 234.256,90.231 238.758,89.774 240.653,84.359 C 242.18,79.999 240.577,77.484 237.427,75.844 C 239.721,75.315 241.449,73.806 241.91,70.689 z M 233.888,81.938 C 232.803,86.298 225.462,83.941 223.082,83.35 L 225.01,75.621 C 227.39,76.215 235.022,77.391 233.888,81.938 z M 234.974,70.626 C 233.984,74.592 227.874,72.577 225.892,72.083 L 227.64,65.073 C 229.622,65.567 236.005,66.489 234.974,70.626 z" />
-      </g>
-    </g>
+     transform="translate(-435.38471,-510.41637)">
     <text
        xml:space="preserve"
        style="font-size:57.37974548px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:1000%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Nokia Cellphone FC;-inkscape-font-specification:Nokia Cellphone FC"
@@ -129,8 +115,18 @@
          id="tspan2990"
          x="444.40439"
          y="559.16772"
-         style="font-size:57.66570663px;font-weight:normal;font-family:Coolvetica;-inkscape-font-specification:Coolvetica">Coin<tspan
-   style="fill:#1a93f7;fill-opacity:1"
-   id="tspan3764">map</tspan></tspan></text>
+         style="font-size:57.66570663px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#2e3436;font-family:Coolvetica;-inkscape-font-specification:Coolvetica"><tspan
+           style="fill:#231f20;fill-opacity:1"
+           id="tspan4482">c<tspan
+   style="fill:#ff455f;fill-opacity:1"
+   id="tspan4486">o</tspan>in</tspan><tspan
+           style="fill:#87ce26;fill-opacity:1"
+           id="tspan3089">map</tspan></tspan></text>
+    <path
+       style="fill:#ff455f;fill-opacity:1;stroke:none"
+       d="M 499.42384,553.79502 L 487.25918,572.60383 L 475.09451,553.79501 z"
+       id="rect3097"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
   </g>
 </svg>
