@@ -1,18 +1,25 @@
-DogeCoinMap
+FeatherCoinMap
 =======
 
-Fork of coinmap, that shows doge. Wow.
+<http://feathercoinmap.org/>
 
-<http://dogecoinmap.github.io/>
-
-Map showing places where you can use Doge.
+Map showing all the shops accepting Feathercoin around the world.
 
 Donations welcome at:
-* DLKfVkW5SMNsJ7rfZtZKf4ZKxdCtiDj6NT (Dogecoin)
-* 14ngpCdLtSy9uBf7D1FqsbB2EYcBEoVJCb (Bitcoin)
+* 71x4LXb1mseqVPW1pXncsKKy9sb1Cx4YBe (Feathercoin)
+*  (Bitcoin)
 
-Original: <http://coinmap.org>
 
-Licensed under [Affero General Public License 3](http://www.gnu.org/licenses/agpl-3.0.html)
-Map Data © by [OpenStreetMap contributors](http://www.openstreetmap.org/copyright)
-Map Icons CC-0 by [Brian Quinion](http://www.sjjb.co.uk/mapicons/)
+* Licensed under [Affero General Public License 3](http://www.gnu.org/licenses/agpl-3.0.html)
+* Map Data © by [OpenStreetMap contributors](http://www.openstreetmap.org/copyright)
+* Map Icons CC-0 by [Brian Quinion](http://www.sjjb.co.uk/mapicons/)
+
+
+Dependencies on ubuntu linux:
+
+python-requests
+python-crypto
+python-gevent
+python-greenlet
+python-oauthlib
+python-urllib3
