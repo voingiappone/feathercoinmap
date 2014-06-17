@@ -64,6 +64,10 @@ a {
   color: #0078A8;
 }
 
+img.leaflet-marker-icon {
+  border-radius: 12px;
+}
+
 #lang {
   left: 0px;
   top: 250px;
@@ -97,15 +101,13 @@ a {
   cursor: pointer;
 }
 
-/* hides footer and marker-list on small screen */
+/* hides footer in small screen */
 @media (max-width: 780px) {
   #footer {
     display: none;
   }
-  #marker-list {
-    display: none;
-  }
 }
+
 
 .leaflet-almost-top {
    position: absolute;
@@ -132,4 +134,14 @@ a {
 .placename{
     border-bottom: 1px rgb(230,230,230) solid;
     cursor:pointer;
+}
+
+body, .leaflet-popup,.leaflet-control{
+    font-family:'Comic Sans MS' !important; /*!!!!!!!IMPORANT!!!!"!"!"!"!"!*/ 
+}
+
+.leaflet-popup-content-wrapper {
+    background-image: url('../img/feathercoin-back.png');
+    background-repeat: repeat-y;
+    background-repeat: repeat-x;
 }

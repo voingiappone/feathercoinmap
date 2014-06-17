@@ -154,7 +154,7 @@ nodes = {}
 ways = {}
 
 def determine_icon(tags, coin = 'bitcoin'):
-	icon = '_' + coin
+	icon = coin
 	for kv in icon_mapping:
 		k,v = kv.split(':')
 		t = tags.get(k)
@@ -167,9 +167,9 @@ def determine_icon(tags, coin = 'bitcoin'):
 	icon = icon.replace('-', '_')
 	return icon
 
-def get_points(coin = 'bitcoin', iso = 'XBT'):
+def get_points(coin = 'bitcoin'):
 	points = []
-	resp = requests.get('http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:%s"=yes];>;way["payment:%s"=yes];>;relation["payment:%s"=yes];>;node["currency:%s"=yes];>;way["currency:%s"=yes];>;relation["currency:%s"=yes];);out;' % (coin, coin, coin, iso, iso, iso)).json()
+	resp = requests.get('http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:%s"=yes];>;way["payment:%s"=yes];>;relation["payment:%s"=yes];>;);out;' % (coin, coin, coin)).json()
 	print len(resp['elements'])
 	for e in resp['elements']:
 		lat = e.get('lat', None)
@@ -180,23 +180,17 @@ def get_points(coin = 'bitcoin', iso = 'XBT'):
 
 		if typ == 'node':
 			nodes[ide] = (lat, lon)
-			if tags.get('payment:%s' % coin) != 'yes' and tags.get('currency:%s' % iso) != 'yes': # nodes that are part of way (i.e. not accepting coins)
+			if tags.get('payment:%s' % coin) != 'yes': # nodes that are part of way (i.e. not accepting coins)
 				continue
 
 		elif typ == 'way':
-			try:
-				lat, lon = nodes[e['nodes'][0]] # extract coordinate of first node
-			except:
-				continue
+			lat, lon = nodes[e['nodes'][0]] # extract coordinate of first node
 			ways[ide] = (lat, lon)
-			if tags.get('payment:%s' % coin) != 'yes' and tags.get('currency:%s' % iso) != 'yes': # ways that are part of relation
+			if tags.get('payment:%s' % coin) != 'yes': # ways that are part of relation
 				continue
 
 		elif typ == 'relation':
-			try:
-				lat, lon = ways[e['members'][0]['ref']]
-			except:
-				continue
+			lat, lon = ways[e['members'][0]['ref']]
 
 		if not lat or not lon:
 			continue
@@ -217,12 +211,14 @@ def get_points(coin = 'bitcoin', iso = 'XBT'):
 			point['country'] = tags.get('addr:country', '')
 		if 'contact:website' in tags:
 			w = tags['contact:website']
-			if w.startswith('http://') or w.startswith('https://'):
-				point['web'] = w
+			if not w.startswith('http'):
+				w = 'http://' + w
+			point['web'] = w
 		elif 'website' in tags:
 			w = tags['website']
-			if w.startswith('http://') or w.startswith('https://'):
-				point['web'] = w
+			if not w.startswith('http'):
+				w = 'http://' + w
+			point['web'] = w
 		if 'contact:email' in tags:
 			point['email'] = tags['contact:email']
 		elif 'email' in tags:

@@ -32,7 +32,7 @@ function coinmap() {
 	var coin_clusters = {};
 	var coins = get_coins();
 	for (var i = 0; i < coins.length; i++) {
-		coin_clusters[coins[i]] = new L.MarkerClusterGroup({showCoverageOnHover: false, maxClusterRadius: 64});
+		coin_clusters[coins[i]] = new L.MarkerClusterGroup({showCoverageOnHover: false, maxClusterRadius: 54});
 	}
 
 	window.total_count = 0;
@@ -44,7 +44,7 @@ function coinmap() {
 
 	var map = L.map('map', {
 		center: [0, 0],
-		zoom: 3,
+		zoom: 2,
 		layers: map_layers,
 		worldCopyJump: true
 	});
@@ -112,7 +112,10 @@ function coinmap() {
 	map.on('overlayremove', redrawVenues);
 	map.on('overlayadd', redrawVenues);
 
-	map.locate({setView: true, maxZoom: 12});
+    $(document).ready( function(){
+        setTimeout(redrawVenues,500);
+    });
+	//map.locate({setView: true, maxZoom: 3});
 
 	map.addControl( new L.Control.Search({
 		url: 'http://nominatim.openstreetmap.org/search?format=json&q={s}',
@@ -144,28 +147,13 @@ function coinmap() {
 	});
 
 	$('#btn_footer_close').click(function() {
-		setFooter('closed');
+		$('#footer').toggleClass('closed');
+		$('#btn_footer_open').toggleClass('opened');
 	});
 	$('#btn_footer_open').click(function() {
-		setFooter('opened');
+		$('#footer').toggleClass('closed');
+		$('#btn_footer_open').toggleClass('opened');
 	});
-	if (localStorage) {
-		setFooter(localStorage.getItem('footerState'));
-	}
-}
-
-function setFooter(state) {
-	if (state == 'opened') {
-		$('#footer').removeClass('closed');
-		$('#btn_footer_open').removeClass('opened');
-	}
-	else if (state == 'closed') {
-		$('#footer').addClass('closed');
-		$('#btn_footer_open').addClass('opened');
-	}
-	if (localStorage) {
-		localStorage.setItem('footerState', state);
-	}
 }
 
 function l(string, fallback) {
