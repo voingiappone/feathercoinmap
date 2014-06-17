@@ -21,24 +21,25 @@ Donations welcome at:
 
 Clone the repository directly inside the htdocs folder of a webserver:
 
-  git clone https://github.com/voingiappone/feathercoinmap
+    git clone https://github.com/voingiappone/feathercoinmap
 
 Dependencies on Ubuntu linux:
 
-a working web server (try xampp(https://www.apachefriends.org/download.html) for an easy-to-install environment)
-python
-python-requests > 2.3.0
-python-crypto
-python-gevent
-python-greenlet
-python-oauthlib
-python-urllib3
+* a working web server (try xampp[https://www.apachefriends.org/download.html] for an easy-to-install environment)
+* python
+* python-requests > 2.3.0
+* python-crypto
+* python-gevent
+* python-greenlet
+* python-oauthlib
+* python-urllib3
 
 -- Updating the library
+
 Once the environment execute the database update script:
 
-  cd MY_INSTALL_DIR/data
-  ./refresh.py
+    cd MY_INSTALL_DIR/data
+    ./refresh.py
   
 This will create the proper files to display the icons on the map.
 Each OSM map update will take 3 to 5 minutes to be available on the map.
