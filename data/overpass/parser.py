@@ -169,7 +169,9 @@ def determine_icon(tags, coin = 'bitcoin'):
 
 def get_points(coin = 'bitcoin'):
 	points = []
-	resp = requests.get('http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:%s"=yes];>;way["payment:%s"=yes];>;relation["payment:%s"=yes];>;);out;' % (coin, coin, coin)).json()
+	# The overpass server @rambler.ru seems dead or outdated. Certainly overcrowded. We switch to overpass-api.de.
+	# resp = requests.get('http://overpass.osm.rambler.ru/cgi/interpreter?data=[out:json];(node["payment:%s"=yes];>;way["payment:%s"=yes];>;relation["payment:%s"=yes];>;);out;' % (coin, coin, coin)).json()
+	resp = requests.get('http://overpass-api.de/api/interpreter?data=[out:json];(node["payment:%s"=yes];>;way["payment:%s"=yes];>;relation["payment:%s"=yes];>;);out;' % (coin, coin, coin)).json()
 	print len(resp['elements'])
 	for e in resp['elements']:
 		lat = e.get('lat', None)
