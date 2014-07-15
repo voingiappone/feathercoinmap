@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<title>How to add a venue in the FeathercoinMap</title>
+	<meta name="viewport" id="viewport" content="maximum-scale=1" />
+	<link rel="icon" type="image/png" href="img/favicon.png" />
+
+
+<style>
+	* {	
+		font-weight: normal;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	a {
+		color: #000;
+	}
+	
+	a:hover {
+		color: black;
+		background: limegreen;
+	}
+
+	body, html {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	#window {
+		background: url('./img/howto/step-1.png') no-repeat center bottom; 
+		overflow: hidden;
+		position: absolute;
+		top: 300px;
+		width: 762px;
+		height: 500px;
+		left: 60%;
+		margin: 0 0 0 -507px;
+		opacity: 0;
+		-webkit-transform: scale(0.8);
+		-moz-transform: scale(0.8);
+		-webkit-transition: all 0.3s ease-out;
+		-moz-transition: all 0.3s ease-out;
+	}
+	
+	#window.visible {
+		opacity: 1;
+		-webkit-transform: scale(1);
+		-moz-transform: scale(1);
+	}
+	
+	
+#addpoint, #description, #tagging, #saving {
+		width: 400px;
+		height: 500px;
+		position: absolute;
+		visibility: hidden;
+		left: 24%;
+	}
+	
+#final-map {
+		width: 762px;
+		height: 500px;
+		position: static;
+		top: 300;
+		left:10;
+		visibility: hidden;
+	}
+	
+	#addpoint {
+		background: url('./img/howto/step-2.png') no-repeat bottom;
+	}
+	
+	#description {
+		background: url('./img/howto/step-3.png') no-repeat bottom;
+	}
+
+	#tagging {
+		background: url('./img/howto/step-4.png') no-repeat bottom;
+	}
+
+	#saving {
+		background: url('./img/howto/step-5.png') no-repeat bottom;
+	}
+
+	#final-map {
+		background: url('./artwork/Logo-res.png') no-repeat bottom;
+	}
+	
+	h1 {
+		font-family: "HelveticaNeue-Light", "Helvetica";
+		font-size: 34px;
+		margin: 20px 0 5px 0;
+		width: 800px;
+		position: absolute;
+		left: 50%;
+		top: 70px;
+		margin: 0 0 0 -400px;
+		text-align: center;
+	}
+	
+	h1 span {
+		font-family: "HelveticaNeue-Bold", "Helvetica Bold", "Helvetica";
+	}
+
+	h2 {
+		font-family: "HelveticaNeue-Light", "Helvetica";
+		font-size: 18px;
+		width: 600px;
+		position: absolute;
+		top: 120px;
+		left: 50%;
+		margin: 0 0 0 -300px;
+		color: rgb(120,120,120);
+		text-align: center;
+		opacity: 0;
+		-webkit-transition: all 0.3s ease-out;
+		-moz-transition: all 0.3s ease-out;
+	}
+	
+	h2.away {
+		top: 120px;
+		left: 50%;
+		opacity: 0;
+		-webkit-transition: none;
+		-moz-transition: none;
+	}
+	
+	h2.visible {
+		opacity: 2;
+		top: 140px;
+	}
+	
+	h2.hidden {
+		opacity: 0;
+		top: 260px;
+	}
+	
+	::-moz-selection {
+		color: black;
+		background: blue;
+	}
+	
+	::selection {
+		color: black;
+		background: blue;
+	}
+	
+</style>
+
+
+<script type="text/javascript">
+	
+	function reset() {
+		document.getElementById('window').removeAttribute("class");
+		document.getElementById('device21').setAttribute("style", "visibility:hidden");																																								
+		document.getElementById('device9').setAttribute("style", "visibility:hidden");
+		document.getElementById('devicef4').setAttribute("style", "visibility:hidden");
+		document.getElementById('step22').setAttribute("class", "away");
+	}
+	
+	function step0() {
+		document.getElementById('step0').setAttribute("class", "visible");
+	}
+	
+	function step1() {
+		document.getElementById('window').setAttribute("class", "visible");
+		document.getElementById('step0').setAttribute("class", "hidden");
+		document.getElementById('step1').setAttribute("class", "visible");
+		document.getElementById('cursor').setAttribute("class", "away");
+	}
+	
+	function step2() {
+		document.getElementById('step1').setAttribute("class", "hidden");
+		document.getElementById('step2').setAttribute("class", "visible");
+		document.getElementById('addpoint').setAttribute("style", "visibility:visible");
+	}
+	
+	function step3() {
+		document.getElementById('step2').setAttribute("class", "hidden");
+		document.getElementById('step3').setAttribute("class", "visible");
+		document.getElementById('addpoint').setAttribute("style", "visibility:hidden");
+		document.getElementById('description').setAttribute("style", "visibility:visible");
+	}
+	
+	function step4() {
+		document.getElementById('step3').setAttribute("class", "hidden");
+		document.getElementById('step4').setAttribute("class", "visible");
+		document.getElementById('description').setAttribute("style", "visibility:hidden");
+		document.getElementById('tagging').setAttribute("style", "visibility:visible");
+	}
+	
+	function step5() {
+		document.getElementById('step4').setAttribute("class", "hidden");
+		document.getElementById('step5').setAttribute("class", "visible");
+		document.getElementById('tagging').setAttribute("style", "visibility:hidden");
+		document.getElementById('saving').setAttribute("style", "visibility:visible");
+
+	}
+	function step6() {
+		document.getElementById('step5').setAttribute("class", "hidden");
+		document.getElementById('step6').setAttribute("class", "visible");
+		document.getElementById('saving').setAttribute("style", "visibility:hidden");
+		document.getElementById('final-map').setAttribute("style", "visibility:visible");
+	}				
+</script>
+
+</head>
+
+<body onload="setTimeout(step0, 0);">
+
+<h1>How to include your venue/activity in the FeathercoinMap</h1>
+
+<h2 id="step6"><br><br>Welcome to the Feathercoin world!<br><a href="javascript:window.open('','_self').close();">Back to the map.</a></h2>
+<h2 id="step5"><br><br>Ok, you're done! Just press the save button and you point will be added. Sit back and wait for the auto-update to see your shop in the FeathercoinMap.<br><a href="javascript:step6()">Congratulations!</a></h2>
+<h2 id="step4"><br><br>Now you just have to type in the proper tag "payment:feathercoin=yes" in the tags field. And don't forget to add the name!!<br><a href="javascript:step5()">Go to the next step</a></h2>
+<h2 id="step3"><br><br>Search for a proper category for your venue and select it. <br>We selected the "park" for this example.<br><a href="javascript:step4()">Go to the next step</a></h2>
+<h2 id="step2"><br><br>Once you are in, navigate to your location and select the "point" tool. Create your point by clicking on the map. <br><a href="javascript:step3()">Go to the next step</a></h2>
+<h2 id="step1"><br><br>First of all head for the <a href="https://www.openstreetmap.org/login?cookie_test=true&referer=%2Fedit"  target="_blank">OpenStreetMap website</a>. If you have an account, please log in. If you don't, just create one or sign in with your OpenID.<br><a href="javascript:step2()">Go to the next step</a> </h2>
+<h2 id="step0"><br><br>It's easy and just takes five minutes. <a href="javascript:step1()">See the step-by-step tutorial.</a></h2>
+
+<div id="window">
+	<div id="addpoint"></div>
+	<div id="devicef1"></div>
+	<div id="devicef2"></div>
+	<div id="devicef3"></div>
+	<div id="devicef4"></div>
+	<div id="description"></div>
+	<div id="tagging"></div>
+	<div id="saving"></div>
+	<div id="final-map"></div>
+</div>
+
+</body>
+</html>
