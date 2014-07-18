@@ -54,15 +54,15 @@ Two methods can be used to schedule a periodical update of the database:
 * a Cron job
 
 The script approach is just as easy as it is inelegant. A script is created with the preferred text
-editor conteining the lines:
+editor containing the lines:
 
     #!/bin/bash
     
     i=0    
     while [ $i = 0 ]
      do
-      MY_INSTALL_DIR/data/refresh.py  #execute the update
-      sleep 3600						 #waits for 60 minutes
+      MY_INSTALL_DIR/data/refresh.py	#execute the update
+      sleep 3600						#waits for 60 minutes
      done
 
 Once you have given it the permission for execution with `chmod 777 my_auto_updater` you only have to launch it.
